@@ -91,6 +91,26 @@ namespace BookStore_WebApi.Repository
             }
             return false;
         }
+        //Delete a book by Id
+        public async Task<bool> RemoveBook(int id)
+        {
+            /*
+            var book = new Book() {Id = id};
+            _context.Remove(book);
+            await _context.SaveChangesAsync(); 
+            return true;
+            */
+
+            //Get a book by Id
+            var book = await _context.Book.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (book != null)
+            {
+                _context.Remove(book);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
 
     }
 }

@@ -50,7 +50,16 @@ namespace BookStore_WebApi.AddControllers
             var result = await _bookRepository.UpdateBook(id, model);
 
             if (result) return Ok(result);
-            return BadRequest("Error!");
+            return BadRequest("This book is not exist!");
         }
+        [HttpDelete("{id}")]
+        //Delete a book by Ud
+        public async Task<IActionResult> RemoveBook(int id)
+        {
+            var result = await _bookRepository.RemoveBook(id);
+            if (result) return Ok(result);
+            return BadRequest("This book is not exit!");
+        }
+
     }
 }

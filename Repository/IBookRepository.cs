@@ -10,5 +10,6 @@ namespace BookStore_WebApi.Repository
         Task<BookDetailsDto> GetDetailsById(int id);
         Task<int> CreateBook(CreateBookDto model);
         Task<bool> UpdateBook(int id, UpdateBookDto model);
+        Task<bool> RemoveBook(int id);
     }
 }
