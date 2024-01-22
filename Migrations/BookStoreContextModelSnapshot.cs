@@ -28,7 +28,7 @@ namespace BookStore_WebApi.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Despription")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
@@ -39,7 +39,7 @@ namespace BookStore_WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Book");
+                    b.ToTable("Books");
                 });
 #pragma warning restore 612, 618
         }
