@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BookStore_WebApi.Data;
 using BookStore_WebApi.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +27,11 @@ namespace BookStore_WebApi
             services.AddDbContext<BookStoreContext>(options =>
              options.UseNpgsql(Configuration.GetConnectionString("BookStoreConnectionString")
              ));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                                .AddEntityFrameworkStores<BookStoreContext>()
+                                .AddDefaultTokenProviders();
+
             services.AddControllers();
             services.AddTransient<IBookRepository, BookRepository>();
 
