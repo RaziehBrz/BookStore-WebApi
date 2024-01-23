@@ -34,7 +34,7 @@ namespace BookStore_WebApi
 
             services.AddControllers();
             services.AddTransient<IBookRepository, BookRepository>();
-
+            services.AddTransient<IAccountRepository, AccountRepository>();
 
             services.AddSwaggerGen(c =>
             {
