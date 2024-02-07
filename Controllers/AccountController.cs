@@ -9,8 +9,6 @@ namespace BookStore_WebApi.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountRepository _accountRepository;
-
-
         public AccountController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
@@ -22,6 +20,17 @@ namespace BookStore_WebApi.Controllers
             var result = await _accountRepository.SignUp(signUpDto);
             if (result.Succeeded) return Ok();
             return BadRequest(result.Errors.Select(x => x.Description).ToList());
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            var result = await _accountRepository.Login(loginDto);
+            if (string.IsNullOrEmpty(result))
+            {
+                return Unauthorized();
+            }
+            return Ok(result);
         }
     }
 }

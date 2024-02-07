@@ -1,13 +1,15 @@
 using System.Threading.Tasks;
 using BookStore_WebApi.Models;
 using BookStore_WebApi.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace BookStore_WebApi.AddControllers
+namespace BookStore_WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
@@ -21,6 +23,7 @@ namespace BookStore_WebApi.AddControllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         //Get all books
         public async Task<IActionResult> GetAllBooks()
         {
@@ -66,6 +69,5 @@ namespace BookStore_WebApi.AddControllers
             if (result) return Ok(result);
             return BadRequest("This book is not exit!");
         }
-
     }
 }

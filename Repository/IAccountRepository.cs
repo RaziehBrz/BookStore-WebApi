@@ -7,5 +7,6 @@ namespace BookStore_WebApi.Repository
     public interface IAccountRepository
     {
         Task<IdentityResult> SignUp(SignUpDto signUpDto);
+        Task<string> Login(LoginDto loginDto);
     }
 }

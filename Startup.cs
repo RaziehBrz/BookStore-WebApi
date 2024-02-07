@@ -59,9 +59,36 @@ namespace BookStore_WebApi
             services.AddTransient<IAccountRepository, AccountRepository>();
 
             services.AddSwaggerGen(c =>
+ {
+     // Define the Bearer token scheme
+     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+     {
+         Description = "JWT Authorization header using the Bearer scheme",
+         Name = "Authorization",
+         In = ParameterLocation.Header,
+         Type = SecuritySchemeType.ApiKey,
+         Scheme = "Bearer"
+     });
+
+     // Require the Bearer token for all operations
+     c.AddSecurityRequirement(new OpenApiSecurityRequirement
+     {
+        {
+            new OpenApiSecurityScheme
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            });
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+     });
+
+     // Other Swagger configuration options...
+ });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
